@@ -1,0 +1,55 @@
+# Payment Gateway Configuration - Ethiopian Context
+app:
+  name: "Ethiopian Payment Gateway"
+  version: "1.0.0"
+  environment: "development"
+
+server:
+  port: 8080
+  read_timeout: 30s
+  write_timeout: 30s
+  graceful_shutdown_timeout: 10s
+
+database:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "postgres"  # Change this to your PostgreSQL password
+  name: "ethiopian_payments"
+  sslmode: "disable"
+  max_connections: 25
+  max_idle_connections: 5
+  connection_max_lifetime: "5m"
+
+rabbitmq:
+  url: "amqp://guest:guest@localhost:5672/"
+  queue_name: "ethiopian_payment_queue"
+  exchange: "ethiopian_payment_exchange"
+  consumer_tag: "ethiopian_payment_consumer"
+  prefetch_count: 10
+
+worker:
+  concurrency: 5
+  max_retries: 3
+  retry_delay: "5s"
+
+# Ethiopian-specific settings
+ethiopian:
+  # Exchange rate (for demo purposes)
+  usd_to_etb: 56.50
+  # Business hours (in Ethiopian Time - GMT+3)
+  business_hours_start: "08:00"
+  business_hours_end: "17:00"
+  # Common Ethiopian payment references
+  reference_prefixes:
+    - "ETB"
+    - "ETH"
+    - "ADDIS"
+    - "CBE"  # Commercial Bank of Ethiopia
+    - "AWASH"  # Awash Bank
+    - "DASHE"  # Dashen Bank
+
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
