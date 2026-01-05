@@ -39,7 +39,7 @@ Login: guest / guest
 
 Check Queues tab - you should see ethiopian_payment_queue
 
-Running the Application 🚀
+Running the Application 
  First Terminal - Run API
 cmd
 # Navigate to project directory
